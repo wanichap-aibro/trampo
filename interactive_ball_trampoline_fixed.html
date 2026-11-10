@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>แรงดลจากลูกบอลเด้งบนแทรมโพลีน | SmartMathPro Interactive</title>
+<style>
+:root{--blue:#1187df;--deep:#0a3c70;--sky:#eef8ff;--line:#d9e9f6;--ink:#21384f;--muted:#6a849d;--orange:#f68a37;--green:#0a9e83;--shadow:0 12px 28px rgba(31,100,159,.09)}
+*{box-sizing:border-box} body{margin:0;font-family:"Noto Sans Thai","Sarabun",Tahoma,system-ui,sans-serif;background:linear-gradient(140deg,#eff8ff 0%,#fbfdff 57%,#eaf4ff 100%);color:var(--ink);font-size:14px}
+button,input,select{font:inherit} button{cursor:pointer}
+.app{max-width:860px;margin:22px auto 38px;padding:0 13px}
+.hero{background:linear-gradient(116deg,#0754a6,#138dea 72%,#12b7ed);color:#fff;border-radius:22px 22px 18px 18px;position:relative;padding:24px 28px 26px;overflow:hidden;box-shadow:var(--shadow)}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #ffffff3d;border-radius:50%}.hero:before{height:340px;width:340px;right:-150px;top:-190px}.hero:after{height:240px;width:240px;right:36px;bottom:-196px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.09em;color:#d4f2ff;background:#ffffff24;border:1px solid #ffffff32;border-radius:100px;padding:6px 11px}.eyebrow span{width:7px;height:7px;border-radius:50%;background:#8fffed;box-shadow:0 0 0 3px #ffffff20}
+h1{margin:12px 0 5px;line-height:1.28;font-size:clamp(22px,3.7vw,31px);letter-spacing:-.035em}.hero p{margin:0;max-width:700px;line-height:1.7;color:#e3f5ff;font-size:13px}
+.workspace{margin-top:14px;display:grid;grid-template-columns:minmax(0,1.38fr) minmax(255px,.88fr);gap:13px}.card{background:#fff;border:1px solid #dfebf7;border-radius:18px;box-shadow:var(--shadow)}
+.scene-card{overflow:hidden}.scene-head{padding:16px 18px 5px;display:flex;align-items:center;justify-content:space-between;gap:10px}.section-title{font-size:16px;font-weight:850;color:var(--deep);margin:0}.phase{background:#e4f6ff;border:1px solid #bbebff;color:#075e9b;font-size:11px;font-weight:800;border-radius:30px;padding:6px 10px;text-align:right}
+.stage{position:relative;min-height:330px;overflow:hidden} #sceneCanvas{display:block;width:100%;height:auto;min-height:280px;max-height:426px;aspect-ratio:460/465;cursor:default}
+.stage-note{display:flex;justify-content:center;gap:16px;padding:0 8px 12px;color:#7891a9;font-size:10px;flex-wrap:wrap}.legend-swatch{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.side{display:flex;flex-direction:column;gap:12px}.meter-card{padding:17px 16px 14px;flex:1}.meter-title{font-size:11px;font-weight:800;color:#6e89a5;letter-spacing:.05em}.main-force{display:flex;align-items:baseline;gap:6px;margin:6px 0 5px}.main-force b{font-size:34px;line-height:1.25;letter-spacing:-.045em;color:#097bd1;font-variant-numeric:tabular-nums}.main-force span{font-weight:750;color:#6e89a5;font-size:12px}.meter{height:8px;background:#e5f2ff;border-radius:50px;overflow:hidden}#forceFill{height:100%;background:linear-gradient(90deg,#0cbfe9,#1168df);width:0%;border-radius:50px;transition:width .07s linear}.meter-foot{font-size:11px;margin-top:6px;color:#7b90aa}.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.metric{background:#f3f9ff;border:1px solid #e4effa;border-radius:12px;padding:10px 10px 8px;min-height:74px}.metric-label{color:#607d9a;font-size:10px;line-height:1.5;font-weight:750}.metric-value{font-size:18px;font-weight:850;letter-spacing:-.025em;color:#123e71;margin-top:3px;font-variant-numeric:tabular-nums}.metric-value small{font-size:10px;color:#6c849a}
+.callout{background:linear-gradient(140deg,#effaff,#eaf2ff);border:1px solid #d6eafa;border-radius:16px;padding:15px 16px}.callout h3{font-size:13px;margin:0 0 6px;color:#064b8b}.callout p{font-size:12px;margin:0;line-height:1.8;color:#587590}.transport{margin-top:13px;padding:12px 17px}.transport-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.primary{display:inline-flex;gap:7px;align-items:center;justify-content:center;border:0;background:#0c78dc;color:white;font-weight:850;padding:11px 16px;border-radius:11px;min-width:125px;box-shadow:0 5px 13px #0c78dc30}.primary:hover{background:#086ac6}.secondary{border:1px solid #d2e5f5;color:#225480;padding:10px 13px;border-radius:11px;background:#f4faff;font-weight:750}.secondary:hover{background:#e3f3ff}.speed{margin-left:auto;display:flex;align-items:center;gap:7px;color:#637f9a;font-size:11px;font-weight:750}select{border:1px solid #d6e6f5;background:#fff;color:#28567c;padding:8px 7px;border-radius:9px}
+.timeline{display:flex;align-items:center;gap:11px;margin-top:11px}.timeline input{flex:1;min-width:0}.time-label{color:#597893;font-weight:750;font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:7px;border-radius:9px;background:#dceefa;outline:0;accent-color:#1188df;cursor:pointer}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border:3px solid #fff;border-radius:50%;background:#0d84da;box-shadow:0 1px 5px #235f9c55}input[type=range]::-moz-range-thumb{width:13px;height:13px;border:3px solid #fff;border-radius:50%;background:#0d84da;box-shadow:0 1px 5px #235f9c55}
+.controls{padding:16px 18px 17px;margin-top:13px}.controls-title{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:13px}.controls-title p{margin:0;color:#8095aa;font-size:11px}.param-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 18px}.param{background:#fff}.param-head{display:flex;align-items:center;justify-content:space-between;gap:4px;margin-bottom:10px}.param-head label{font-size:12px;font-weight:800;color:#345b7d}.param-number{color:#076dc6;font-size:12px;font-weight:850;white-space:nowrap}.param-help{margin-top:7px;line-height:1.45;color:#899eb3;font-size:10px}.theta-readout{margin-top:12px;font-size:11px;line-height:1.6;background:#eaf6ff;border:1px solid #cce8fa;border-radius:10px;padding:8px 10px;color:#306d9d}
+.graph-card{padding:17px 20px 16px;margin-top:13px}.graph-header{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;flex-wrap:wrap}.graph-header p{color:#7990a8;margin:4px 0 0;font-size:11px;line-height:1.7}.switcher{display:flex;padding:3px;background:#ecf5fd;border:1px solid #e0edf8;border-radius:11px;gap:3px}.switcher button{border:0;border-radius:8px;background:transparent;color:#6c879f;font-size:11px;font-weight:800;padding:8px 10px;white-space:nowrap}.switcher button[aria-pressed=true]{color:#0765b7;background:white;box-shadow:0 2px 7px #124e8626}
+#forceChart{display:block;width:100%;height:240px;cursor:crosshair;touch-action:none}.chart-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid #eaf2f9;padding-top:10px;font-size:11px;color:#71879d}.chart-bottom strong{color:#0b76ca;font-size:12px}
+.lesson{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:13px}.lesson .card{padding:16px 18px}.lesson h3{margin:0 0 7px;color:#154775;font-size:13px}.equation{font-size:19px;font-weight:800;color:#0c73cb;letter-spacing:-.018em;margin:4px 0}.lesson p{margin:6px 0 0;line-height:1.65;font-size:11px;color:#627f99}.footnote{font-size:10px;line-height:1.7;color:#7b92a9;margin:13px 6px 0}
+@media(max-width:710px){.workspace{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.param-grid{grid-template-columns:1fr 1fr}.app{margin-top:10px}} @media(max-width:520px){.hero{padding:20px}.hero p{font-size:12px}.side{grid-template-columns:1fr}.param-grid{grid-template-columns:1fr}.lesson{grid-template-columns:1fr}.graph-card{padding:15px 12px}.speed{margin-left:0}.timeline{flex-wrap:wrap}.controls-title{align-items:flex-start}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="hero">
+  <div class="eyebrow"><span></span> SMARTMATHPRO · PHYSICS INTERACTIVE</div>
+  <h1>แรงดลเกิดขึ้นตอนไหน<br>เมื่อลูกบอลเด้งบนแทรมโพลีน?</h1>
+  <p>ให้ลูกบอลเด้งเข้ามาจากด้านซ้าย แล้วลองปรับ <b>มุม θ (Theta)</b> เพื่อสังเกตว่าความเร็วแนวดิ่ง แรงที่ผืนผ้าดันกลับ และ<b>พื้นที่ใต้กราฟแรง–เวลา</b> เปลี่ยนอย่างไร</p>
+</header>
+<section class="workspace">
+  <div class="card scene-card">
+    <div class="scene-head">
+      <h2 class="section-title">ภาพจำลองลูกบอลเด้งแบบ 3 มิติ</h2>
+      <span id="phase" class="phase">ลูกบอลกำลังพุ่งเข้า</span>
+    </div>
+    <div class="stage">
+      <canvas id="sceneCanvas" width="460" height="465" aria-label="ภาพจำลองแทรมโพลีนแบบมองสามมิติที่อยู่กับที่ พร้อมลูกบอลพุ่งเข้าจากด้านซ้ายและเด้งกลับ"></canvas>
+    </div>
+    <div class="stage-note">
+      <span>ลูกบอลพุ่งเข้าจากซ้าย → สัมผัสผืนผ้า → เด้งออกไปทางขวา</span>
+      <span><i class="legend-swatch" style="background:#117cda"></i>แรงจากแทรมโพลีน (N)</span>
+      <span><i class="legend-swatch" style="background:#fa9139"></i>น้ำหนัก (mg)</span>
+    </div>
+  </div>
+  <div class="side">
+    <div class="card meter-card">
+      <div class="meter-title">แรงดันจากแทรมโพลีนขณะนี้</div>
+      <div class="main-force"><b id="forceValue">0</b><span>นิวตัน (N)</span></div>
+      <div class="meter"><div id="forceFill"></div></div>
+      <div class="meter-foot">เทียบกับแรงสูงสุด <strong id="maxForceLabel">–</strong> N</div>
+      <div class="metric-grid">
+        <div class="metric"><div class="metric-label">ความเร็วแนวดิ่ง</div><div class="metric-value"><span id="velocityValue">0.00</span> <small>m/s</small></div></div>
+        <div class="metric"><div class="metric-label">ผืนผ้ายุบตัว</div><div class="metric-value"><span id="sagValue">0</span> <small>cm</small></div></div>
+        <div class="metric"><div class="metric-label">แรงดลจากผืนผ้า</div><div class="metric-value"><span id="impulseValue">0</span> <small>N·s</small></div></div>
+        <div class="metric"><div class="metric-label">แรงดลลัพธ์ช่วงสัมผัส</div><div class="metric-value"><span id="netImpulseValue">0</span> <small>N·s</small></div></div>
+        <div class="metric"><div class="metric-label">ความเร็วแนวระดับ</div><div class="metric-value"><span id="horizontalVelocity">0.00</span> <small>m/s</small></div></div>
+        <div class="metric"><div class="metric-label">ความเร็วแนวดิ่งก่อนชน</div><div class="metric-value"><span id="impactVertical">0.00</span> <small>m/s</small></div></div>
+      </div>
+    </div>
+    <div class="callout">
+      <h3 id="learningTitle">ก่อนสัมผัสผืนผ้า</h3>
+      <p id="learningBody">ลูกบอลกำลังเด้งเข้ามาจากด้านข้าง ยังไม่มีแรงจากแทรมโพลีนมากระทำ จึงยังไม่มีแรงดลจากผืนผ้า</p>
+    </div>
+  </div>
+</section>
+<section class="card transport">
+  <div class="transport-row">
+    <button class="primary" type="button" id="playBtn">❚❚ &nbsp;หยุดชั่วคราว</button>
+    <button class="secondary" type="button" id="restartBtn">↺ เริ่มใหม่</button>
+    <div class="speed"><label for="speedSelect">ความเร็วภาพ</label><select id="speedSelect"><option value=".25">0.25× (ช้ามาก)</option><option value=".45" selected>0.45× (ช้า)</option><option value=".7">0.7×</option><option value="1">1× (ปกติ)</option></select></div>
+  </div>
+  <div class="timeline"><input id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="เลื่อนเวลาเพื่อดูแต่ละช่วง"><span class="time-label" id="timelineText">0.00 / 0.00 s</span></div>
+</section>
+<section class="card controls">
+  <div class="controls-title"><h2 class="section-title">ทดลองเปลี่ยนตัวแปร</h2><p>ปรับค่าแล้วภาพและกราฟจะคำนวณใหม่</p></div>
+  <div class="param-grid">
+    <div class="param">
+      <div class="param-head"><label for="mass">มวลของลูกบอล</label><span class="param-number" id="massOut">5 kg</span></div>
+      <input id="mass" type="range" min="1" max="10" step="0.5" value="5">
+      <div class="param-help">มวลมากขึ้น → แรงดลและแรงกดบนผืนผ้าเพิ่มขึ้น</div>
+    </div>
+    <div class="param">
+      <div class="param-head"><label for="height">ความสูงสมมูลก่อนชน</label><span class="param-number" id="heightOut">1.2 m</span></div>
+      <input id="height" type="range" min="0.4" max="2.4" step="0.1" value="1.2">
+      <div class="param-help">กำหนดอัตราเร็วรวมก่อนชนด้วยสูตร v = √(2gh)</div>
+    </div>
+    <div class="param">
+      <div class="param-head"><label for="stiffness">ความแข็งของผืนผ้า</label><span class="param-number" id="stiffnessOut">8,000 N/m</span></div>
+      <input id="stiffness" type="range" min="4000" max="18000" step="1000" value="8000">
+      <div class="param-help">แข็งขึ้น → ยุบน้อยลงและเวลาสัมผัสสั้นลง</div>
+    </div>
+    <div class="param">
+      <div class="param-head"><label for="theta">มุมเด้งเข้าหาแทรมโพลีน θ</label><span class="param-number" id="thetaOut">25°</span></div>
+      <input id="theta" type="range" min="0" max="55" step="1" value="25">
+      <div class="param-help">วัดจากแนวดิ่ง · ยิ่งมุมมาก ลูกบอลยิ่งพุ่งเข้าจากด้านข้างมากขึ้น</div>
+    </div>
+  </div>
+  <div class="theta-readout" id="thetaExplanation">ลูกบอลเด้งเข้ามาจากด้านซ้ายด้วย <strong>θ = 25°</strong> (วัดจากแนวดิ่ง) · ก่อนชนมี v<sub>y</sub> = <strong>0.00 m/s</strong> และ v<sub>x</sub> = <strong>0.00 m/s</strong></div>
+</section>
+<section class="card graph-card">
+  <div class="graph-header">
+    <div><h2 class="section-title">กราฟแรง–เวลา ขณะลูกบอลสัมผัสผืนผ้า</h2><p>ส่วนที่ระบายสีคือพื้นที่ใต้กราฟ (แรงดล) · แตะหรือคลิกกราฟเพื่อเลื่อนดู</p></div>
+    <div class="switcher" role="group" aria-label="รูปแบบของกราฟ">
+      <button id="trampMode" type="button" aria-pressed="true">แรงจากผืนผ้า</button>
+      <button id="netMode" type="button" aria-pressed="false">แรงลัพธ์</button>
+    </div>
+  </div>
+  <canvas id="forceChart" height="240" aria-label="กราฟแรงต่อเวลา พื้นที่ใต้กราฟแสดงแรงดล"></canvas>
+  <div class="chart-bottom"><span id="chartExplain">พื้นที่สีฟ้า = แรงดลจากแทรมโพลีน ∫N dt</span><strong id="chartArea">0 N·s</strong></div>
+</section>
+<section class="lesson">
+  <div class="card">
+    <h3>① แรงดลจากผืนผ้า</h3>
+    <div class="equation">J<sub>N</sub> = ∫ N dt</div>
+    <p>เท่ากับพื้นที่ใต้กราฟแรงจากผืนผ้า (สีน้ำเงิน) ตลอดเวลาที่ลูกบอลสัมผัสแทรมโพลีน</p>
+  </div>
+  <div class="card">
+    <h3>② แรงดลลัพธ์ = การเปลี่ยนโมเมนตัม</h3>
+    <div class="equation">J<sub>net</sub> = Δp = m(v<sub>หลัง</sub> − v<sub>ก่อน</sub>)</div>
+    <p>θ วัดจากแนวดิ่ง จึงมีความเร็วตกแนวดิ่ง v<sub>y</sub> = v cos θ และ J<sub>net</sub> = J<sub>N</sub> − mgΔt</p>
+  </div>
+</section>
+<p class="footnote">หมายเหตุ: θ คือมุมของทิศความเร็วลูกบอลก่อนชนที่ทำกับแนวดิ่ง ไม่ใช่มุมกล้อง; h ในแบบจำลองคือความสูงสมมูลสำหรับกำหนดอัตราเร็วรวม v = √(2gh). แทรมโพลีนคงที่อยู่กับที่ แต่ผืนผ้ายังยุบตัวได้ตามแรงกระแทก และสมมติว่าไม่มีแรงเสียดทานในแนวระดับ จึงพิจารณาแรงดลเฉพาะแนวดิ่ง ส่วนการเคลื่อนที่ด้านข้างของลูกบอลในภาพแสดงแบบย่อสเกลเพื่อให้เห็นเส้นทางเด้งชัดขึ้น ค่าจำลองใช้เพื่อการเรียนรู้ ไม่ใช่ค่าทดสอบของแทรมโพลีนจริง</p>
+</main>
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id), g=9.81;
+const els={phase:$("phase"),scene:$("sceneCanvas"),force:$("forceValue"),fill:$("forceFill"),maxForce:$("maxForceLabel"),velocity:$("velocityValue"),sag:$("sagValue"),impulse:$("impulseValue"),netImpulse:$("netImpulseValue"),horizontalVelocity:$("horizontalVelocity"),impactVertical:$("impactVertical"),learnTitle:$("learningTitle"),learnBody:$("learningBody"),play:$("playBtn"),restart:$("restartBtn"),seek:$("seek"),timeline:$("timelineText"),speed:$("speedSelect"),mass:$("mass"),height:$("height"),stiffness:$("stiffness"),theta:$("theta"),massOut:$("massOut"),heightOut:$("heightOut"),stiffnessOut:$("stiffnessOut"),thetaOut:$("thetaOut"),thetaExplanation:$("thetaExplanation"),canvas:$("forceChart"),trampMode:$("trampMode"),netMode:$("netMode"),chartExplain:$("chartExplain"),chartArea:$("chartArea")};
+const fmt=(n,d=0)=>Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+let model={},clock=0,playing=true,lastFrame=0,speed=.45,mode="tramp";
+function updateModel(){
+  const m=+els.mass.value,h=+els.height.value,k=+els.stiffness.value,theta=+els.theta.value;
+  const vImpact=Math.sqrt(2*g*h), ang=theta*Math.PI/180, vy=vImpact*Math.cos(ang), vx=vImpact*Math.sin(ang);
+  const omega=Math.sqrt(k/m), xeq=g/(omega*omega), halfAngle=Math.PI-Math.atan2(vy*omega,g), contactTime=2*halfAngle/omega;
+  const fallTime=vy/g, riseTime=vy/g, total=fallTime+contactTime+riseTime;
+  const xmax=xeq+Math.sqrt(xeq*xeq+(vy/omega)**2);
+  model={m,h,k,theta,ang,vImpact,vx,vy,omega,xeq,contactTime,fallTime,riseTime,total,xmax,Fpeak:k*xmax,Jmax:2*m*vy+m*g*contactTime,netJmax:2*m*vy};
+  els.massOut.textContent=fmt(m,1).replace('.0','')+" kg";
+  els.heightOut.textContent=fmt(h,1)+" m";
+  els.stiffnessOut.textContent=fmt(k)+" N/m";
+  els.thetaOut.textContent=theta+"°";
+  els.maxForce.textContent=fmt(model.Fpeak);
+  els.thetaExplanation.innerHTML=`ลูกบอลเด้งเข้ามาจากด้านซ้ายด้วย <strong>θ = ${theta}°</strong> (วัดจากแนวดิ่ง) · ก่อนชนมี v<sub>y</sub> = <strong>${fmt(vy,2)} m/s</strong> และ v<sub>x</sub> = <strong>${fmt(vx,2)} m/s</strong>`;
+  clock=0; draw();
+}
+function contactState(t){
+  const {omega,xeq,vy,k,m}=model, q=omega*t;
+  const x=xeq*(1-Math.cos(q))+(vy/omega)*Math.sin(q);
+  const v=xeq*omega*Math.sin(q)+vy*Math.cos(q);
+  const N=k*Math.max(0,x);
+  const J=k*(xeq*(t-Math.sin(q)/omega)+(vy/omega)*(1-Math.cos(q))/omega);
+  return {x:Math.max(0,x),v,N,J,netJ:J-m*g*t};
+}
+function stateAt(t){
+  const {fallTime,contactTime,riseTime,vy}=model;
+  const startHeight=vy*vy/(2*g);
+  if(t<fallTime-1e-8){
+    const y=-startHeight+vy*t+.5*g*t*t;
+    return {stage:"approach",y,v:vy+g*t,N:0,J:0,netJ:0,contactElapsed:0};
+  }
+  if(t<=fallTime+contactTime+1e-8){
+    const tau=clamp(t-fallTime,0,contactTime);
+    return {stage:"contact",...contactState(tau),contactElapsed:tau};
+  }
+  const tau=clamp(t-fallTime-contactTime,0,riseTime);
+  return {stage:"rebound",y:-vy*tau+.5*g*tau*tau,v:-vy+g*tau,N:0,J:model.Jmax,netJ:model.netJmax,contactElapsed:contactTime};
+}
+function stageText(st){
+  if(st.stage==="approach") return ["ลูกบอลกำลังพุ่งเข้า","ก่อนสัมผัสผืนผ้า",`ลูกบอลกำลังเด้งเข้ามาจากด้านข้างด้วยมุม θ = ${model.theta}° และมีความเร็วแนวดิ่งก่อนชน = ${fmt(model.vy,2)} m/s`];
+  if(st.stage==="rebound") return ["ลูกบอลกำลังเด้งกลับ","หลังดีดตัวออก","แรงจากผืนผ้าเป็นศูนย์แล้ว ลูกบอลเด้งออกไปโดยคงความเร็วในแนวระดับ และแนวดิ่งกลับทิศหลังได้รับแรงดล"];
+  const p=st.contactElapsed/model.contactTime;
+  if(p<.43) return ["ลูกบอลเริ่มกดผืนผ้า","เริ่มรับแรงจากผืนผ้า","เมื่อบอลกดผืนผ้ามากขึ้น แรงดันขึ้น N เพิ่มขึ้น และพื้นที่ใต้กราฟกำลังสะสม"];
+  if(p<.57) return ["กดลึกสุด","เปลี่ยนทิศการเคลื่อนที่","ความเร็วแนวดิ่งเป็นศูนย์ชั่วขณะตรงจุดกดลึกสุด แต่แรงจากผืนผ้ามีค่ามากที่สุด"];
+  return ["ลูกบอลกำลังดีดกลับ","ผืนผ้าผลักให้เด้งออก","แรงดันยังทำงานต่อไปจนลูกบอลหลุดจากผืนผ้า ทำให้แรงดลเพิ่มขึ้น"];
+}
+function drawScene(st){
+  const c=els.scene.getContext('2d'), W=460,H=465;
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  if(els.scene.width!==Math.round(W*dpr)||els.scene.height!==Math.round(H*dpr)){els.scene.width=Math.round(W*dpr);els.scene.height=Math.round(H*dpr);}
+  c.setTransform(dpr,0,0,dpr,0,0);
+  c.clearRect(0,0,W,H);
+  const bg=c.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#ecf9ff'); bg.addColorStop(.58,'#eaf5ff'); bg.addColorStop(1,'#d9edfc'); c.fillStyle=bg; c.fillRect(0,0,W,H);
+  c.strokeStyle='#d3eafa'; c.lineWidth=1; c.setLineDash([4,9]); [92,175,258,341].forEach(y=>{c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke()}); c.setLineDash([]);
+  c.fillStyle='rgba(214,239,255,.65)'; c.beginPath(); c.arc(390,72,60,0,Math.PI*2); c.fill(); c.beginPath(); c.arc(58,152,29,0,Math.PI*2); c.fill();
+  // Ground shadow
+  const sh=c.createRadialGradient(230,417,18,230,417,150); sh.addColorStop(0,'rgba(43,120,168,.22)'); sh.addColorStop(1,'rgba(43,120,168,0)'); c.save(); c.translate(230,417); c.scale(1,.36); c.fillStyle=sh; c.beginPath(); c.arc(0,0,150,0,Math.PI*2); c.fill(); c.restore();
+  const cx=230, topY=334, sagPix=st.stage==='contact'?st.x*74:0, innerRx=129, outerRx=151;
+  // legs and frame
+  c.lineCap='round'; c.strokeStyle='#39779a'; c.lineWidth=9; [[110,334,100,422],[350,334,360,422],[120,354,340,354],[90,422,121,422],[339,422,370,422]].forEach(a=>{c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(a[2],a[3]);c.stroke()});
+  c.lineWidth=11; c.strokeStyle='#145b91'; c.beginPath(); c.moveTo(80,334); c.quadraticCurveTo(230,386,380,334); c.stroke(); c.lineWidth=4; c.strokeStyle='#6bb4de'; c.stroke();
+  c.beginPath(); c.ellipse(cx,topY,outerRx,32,0,0,Math.PI*2); c.fillStyle='#dbf3ff'; c.fill(); c.lineWidth=10; c.strokeStyle='#195c94'; c.stroke();
+  // mat fabric
+  c.beginPath(); c.moveTo(109,334); c.quadraticCurveTo(230,334+2*sagPix,351,334); c.lineTo(351,344); c.quadraticCurveTo(230,344+2*sagPix,109,344); c.closePath(); const matGrad=c.createLinearGradient(0,334,0,360); matGrad.addColorStop(0,'rgba(134,226,255,.96)'); matGrad.addColorStop(1,'rgba(20,141,224,.36)'); c.fillStyle=matGrad; c.fill();
+  c.beginPath(); c.ellipse(cx,topY,innerRx,21,0,0,Math.PI*2); c.fillStyle='rgba(153,216,246,.45)'; c.fill();
+  c.lineWidth=6; c.strokeStyle='#0da4e8'; c.beginPath(); c.moveTo(109,334); c.quadraticCurveTo(230,334+2*sagPix,351,334); c.stroke(); c.lineWidth=1.4; c.strokeStyle='#d4f7ff'; c.stroke();
+  // ball trajectory and position
+  const worldScale=90; const vx=model.vx, vy=model.vy, fallT=model.fallTime, contactT=model.contactTime;
+  const xContact=230;
+  let ballX, ballY;
+  if(st.stage==='approach'){
+    const startX=xContact-vx*fallT*worldScale; const p=clock/fallT; ballX=startX+(xContact-startX)*p; ballY=topY-28 + st.y*74; // st.y negative above mat, 0 at contact
+  }else if(st.stage==='contact'){
+    ballX=xContact + vx*(st.contactElapsed-contactT*0.5)*worldScale*.9; ballY=topY-28 + st.x*74;
+  }else{
+    const tau=clock-fallT-contactT; ballX=xContact + vx*(contactT*0.42+tau)*worldScale*.9; ballY=topY-28 + st.y*74;
+  }
+  ballX=clamp(ballX,20,W-20); ballY=clamp(ballY,42,topY-14+sagPix);
+  // dashed path guide
+  c.setLineDash([5,5]); c.strokeStyle='#8cc1de'; c.lineWidth=1.3; c.beginPath();
+  const startX=xContact-vx*fallT*worldScale, startY=topY-28-vy*vy/(2*g)*74;
+  c.moveTo(startX,startY);
+  c.lineTo(xContact,topY-28);
+  c.lineTo(clamp(xContact + vx*(contactT*0.42+model.riseTime)*worldScale*.9,0,W), topY-28-vy*vy/(2*g)*74);
+  c.stroke(); c.setLineDash([]);
+  // angle diagram
+  c.fillStyle='rgba(255,255,255,.95)'; c.strokeStyle='#bddcf2'; c.lineWidth=1; roundRect(c,306,38,143,113,13); c.fill(); c.stroke(); c.fillStyle='#155d97'; c.font='bold 12px Tahoma,sans-serif'; c.textAlign='center'; c.fillText('มุมเด้งเข้า θ',376,57);
+  const ox=385, oy=84, len=57, a=model.ang; c.setLineDash([4,3]); c.strokeStyle='#7f9fb7'; c.lineWidth=1.7; c.beginPath(); c.moveTo(ox,oy-7); c.lineTo(ox,oy+62); c.stroke(); c.setLineDash([]);
+  const ex=ox-len*Math.sin(a), ey=oy+len*Math.cos(a); c.strokeStyle='#e56b29'; c.fillStyle='#e56b29'; c.lineWidth=3; c.beginPath(); c.moveTo(ox,oy); c.lineTo(ex,ey); c.stroke(); const aa=Math.atan2(ey-oy,ex-ox); c.beginPath(); c.moveTo(ex,ey); c.lineTo(ex-10*Math.cos(aa-.43),ey-10*Math.sin(aa-.43)); c.lineTo(ex-10*Math.cos(aa+.43),ey-10*Math.sin(aa+.43)); c.closePath(); c.fill(); if(model.theta>0){c.strokeStyle='#007dcd'; c.lineWidth=1.8; c.beginPath(); c.arc(ox,oy,25,Math.PI/2,Math.PI/2+a,true); c.stroke();}
+  c.fillStyle='#0871b7'; c.font='bold 12px Tahoma,sans-serif'; c.textAlign='left'; c.fillText('θ '+model.theta+'°',315,134); c.font='10px Tahoma,sans-serif'; c.fillStyle='#cf6326'; c.fillText('v ลูกบอล',404,124);
+  // ball
+  const r=22; const ballGrad=c.createRadialGradient(ballX-7,ballY-9,2,ballX,ballY,r); ballGrad.addColorStop(0,'#ffd7a9'); ballGrad.addColorStop(.32,'#ff9a42'); ballGrad.addColorStop(1,'#d86a1e'); c.fillStyle=ballGrad; c.beginPath(); c.arc(ballX,ballY,r,0,Math.PI*2); c.fill();
+  c.strokeStyle='rgba(255,230,200,.8)'; c.lineWidth=1.8; c.beginPath(); c.arc(ballX,ballY,r-4,-1.3,1.35); c.stroke(); c.beginPath(); c.moveTo(ballX-r+9,ballY+2); c.quadraticCurveTo(ballX,ballY+7,ballX+r-8,ballY-2); c.stroke();
+  // contact shadow under ball during contact
+  if(st.stage==='contact'){ c.save(); c.translate(ballX,topY+4+sagPix*.58); c.scale(1,.3); c.fillStyle='rgba(188,97,33,.22)'; c.beginPath(); c.arc(0,0,22+st.x*18,0,Math.PI*2); c.fill(); c.restore(); }
+  // arrows N and mg
+  drawArrow(c,ballX+r+18,ballY+10,ballX+r+18,ballY+10-(22+84*Math.sqrt(clamp(st.N/model.Fpeak,0,1))),'#117cda','N',-10,true,st.N>2);
+  drawArrow(c,ballX-r-18,ballY-10,ballX-r-18,ballY+52,'#fa9139','mg',-8,false,true);
+  // label
+  c.fillStyle='rgba(255,255,255,.86)'; roundRect(c,122,432,217,22,11); c.fill(); c.fillStyle='#6691ad'; c.font='bold 10px Tahoma,sans-serif'; c.textAlign='center'; c.fillText('แทรมโพลีนคงที่ · ลูกบอลเด้งเข้าจากด้านซ้าย',230,447);
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function drawArrow(c,x1,y1,x2,y2,color,label,labelDx,up,show){ if(!show) return; const vx=x2-x1, vy=y2-y1, dist=Math.hypot(vx,vy); if(dist<5) return; const ux=vx/dist, uy=vy/dist; c.save(); c.lineCap='round'; c.strokeStyle='#fff'; c.lineWidth=8; c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2-10*ux,y2-10*uy); c.stroke(); c.strokeStyle=color; c.lineWidth=4.5; c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2-10*ux,y2-10*uy); c.stroke(); c.fillStyle=color; c.beginPath(); c.moveTo(x2,y2); c.lineTo(x2-18*ux-8*uy,y2-18*uy+8*ux); c.lineTo(x2-18*ux+8*uy,y2-18*uy-8*ux); c.closePath(); c.fill(); c.fillStyle=up?'#086fc8':'#d77827'; c.font='bold 13px Tahoma,sans-serif'; c.fillText(label,Math.min(430,Math.max(14,x1+labelDx)), y2<y1?y2-8:y1+14); c.restore(); }
+function drawText(st){
+  const t=stageText(st); els.phase.textContent=t[0]; els.learnTitle.textContent=t[1]; els.learnBody.textContent=t[2];
+  els.force.textContent=fmt(st.N); els.fill.style.width=(100*clamp(st.N/model.Fpeak,0,1)).toFixed(1)+"%";
+  const vtxt=(Math.abs(st.v)<.02?"0.00":fmt(Math.abs(st.v),2))+(Math.abs(st.v)<.02?"":" "+(st.v<0?"↑":"↓")); els.velocity.textContent=vtxt;
+  els.sag.textContent=fmt(st.x>0?100*st.x:0,1); els.impulse.textContent=fmt(st.J); els.netImpulse.textContent=fmt(st.netJ); els.horizontalVelocity.textContent=fmt(model.vx,2); els.impactVertical.textContent=fmt(model.vy,2);
+  els.seek.value=Math.round(1000*clock/model.total); els.timeline.textContent=fmt(clock,2)+" / "+fmt(model.total,2)+" s";
+  const area=mode==="tramp"?st.J:st.netJ; els.chartArea.textContent=fmt(area)+" N·s";
+}
+function chartValue(t){ const s=contactState(t); return mode==="tramp"?s.N:s.N-model.m*g; }
+function chartSettings(w,h){ const left=53,right=w-19,top=21,bottom=h-34, range=Math.max(model.Fpeak,1), yMin=mode==="tramp"?0:-model.m*g*1.25, yMax=mode==="tramp"?range*1.1:(range-model.m*g)*1.15; const xOf=t=>left+(right-left)*t/model.contactTime, yOf=F=>bottom-(F-yMin)/(yMax-yMin)*(bottom-top); return {left,right,top,bottom,yMin,yMax,xOf,yOf,yZero:yOf(0)}; }
+function drawChart(st){
+  const canvas=els.canvas, rect=canvas.getBoundingClientRect(), w=rect.width||730, h=240, dpr=Math.min(window.devicePixelRatio||1,2), cw=Math.round(w*dpr), ch=Math.round(h*dpr); if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch;} const c=canvas.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0); c.clearRect(0,0,w,h);
+  const {left,right,top,bottom,yMin,yMax,xOf,yOf,yZero}=chartSettings(w,h), N=160, progressed=st.contactElapsed;
+  c.font='11px Tahoma,sans-serif'; c.strokeStyle='#eaf0f7'; c.lineWidth=1;
+  for(let i=0;i<=4;i++){ const y=top+(bottom-top)*i/4; c.beginPath(); c.moveTo(left,y); c.lineTo(right,y); c.stroke(); const value=yMax-(yMax-yMin)*i/4; c.fillStyle='#7793ab'; c.textAlign='right'; c.textBaseline='middle'; c.fillText(fmt(value/1000,1),left-10,y); }
+  c.fillStyle='#6685a1'; c.font='bold 10px Tahoma,sans-serif'; c.textAlign='left'; c.fillText('แรง (kN)',left-43,11);
+  for(let i=0;i<=4;i++){ const x=left+(right-left)*i/4; c.strokeStyle='#ecf2f8'; c.beginPath(); c.moveTo(x,top); c.lineTo(x,bottom); c.stroke(); c.textAlign='center'; c.fillStyle='#7891aa'; c.font='10px Tahoma,sans-serif'; c.fillText(fmt(model.contactTime*i/4,2),x,bottom+15); }
+  c.fillStyle='#6987a2'; c.textAlign='center'; c.font='bold 10px Tahoma,sans-serif'; c.fillText('เวลาสัมผัส (s)',(left+right)/2,h-5);
+  c.strokeStyle=mode==='net'?'#d4a47e':'#a4b9cb'; c.lineWidth=1.5; if(mode==='net') c.setLineDash([5,4]); c.beginPath(); c.moveTo(left,yZero); c.lineTo(right,yZero); c.stroke(); c.setLineDash([]);
+  if(mode==='tramp'){ const yMg=yOf(model.m*g); c.strokeStyle='#f0a35e'; c.lineWidth=1.4; c.setLineDash([5,4]); c.beginPath(); c.moveTo(left,yMg); c.lineTo(right,yMg); c.stroke(); c.setLineDash([]); c.font='bold 10px Tahoma'; c.textAlign='right'; c.fillStyle='#d58c4b'; c.fillText('mg',right-5,yMg-8); }
+  c.beginPath(); for(let i=0;i<=N;i++){ const t=model.contactTime*i/N, x=xOf(t), y=yOf(chartValue(t)); if(i===0) c.moveTo(x,y); else c.lineTo(x,y);} c.strokeStyle='#b3d1e8'; c.lineWidth=2; c.setLineDash([4,5]); c.stroke(); c.setLineDash([]);
+  if(progressed>0.0001){ c.save(); c.beginPath(); c.moveTo(xOf(0),yZero); const steps=Math.max(2,Math.ceil(N*progressed/model.contactTime)); for(let i=0;i<=steps;i++){ const t=progressed*i/steps; c.lineTo(xOf(t),yOf(chartValue(t))); } c.lineTo(xOf(progressed),yZero); c.closePath(); c.clip(); c.fillStyle='rgba(20,136,226,.25)'; c.fillRect(left,top,right-left,Math.max(0,yZero-top)); if(mode==='net'){ c.fillStyle='rgba(245,148,67,.28)'; c.fillRect(left,yZero,right-left,bottom-yZero);} c.restore(); c.beginPath(); for(let i=0;i<=steps;i++){ const t=progressed*i/steps; if(i===0) c.moveTo(xOf(0),yOf(chartValue(0))); else c.lineTo(xOf(t),yOf(chartValue(t))); } c.strokeStyle='#097bd4'; c.lineWidth=3; c.stroke(); const dotX=xOf(progressed), dotY=yOf(chartValue(progressed)); c.strokeStyle='#0d76d240'; c.lineWidth=1.5; c.setLineDash([4,4]); c.beginPath(); c.moveTo(dotX,top); c.lineTo(dotX,bottom); c.stroke(); c.setLineDash([]); c.beginPath(); c.arc(dotX,dotY,5,0,Math.PI*2); c.fillStyle='#fff'; c.fill(); c.lineWidth=2.5; c.strokeStyle='#097bd4'; c.stroke(); }
+}
+function draw(){ if(!model.total) return; const st=stateAt(clock); drawScene(st); drawText(st); drawChart(st); }
+function setPlaying(v){ playing=v; els.play.textContent=playing?"❚❚  หยุดชั่วคราว":"▶  เล่นต่อ"; }
+els.play.addEventListener('click',()=>setPlaying(!playing)); els.restart.addEventListener('click',()=>{clock=0;setPlaying(true);draw()}); els.seek.addEventListener('input',()=>{setPlaying(false);clock=model.total*(+els.seek.value/1000);draw()}); els.speed.addEventListener('change',()=>{speed=+els.speed.value}); [els.mass,els.height,els.stiffness,els.theta].forEach(el=>el.addEventListener('input',updateModel));
+function changeMode(next){ mode=next; els.trampMode.setAttribute('aria-pressed',String(mode==='tramp')); els.netMode.setAttribute('aria-pressed',String(mode==='net')); els.chartExplain.textContent=mode==='tramp'?'พื้นที่สีฟ้า = แรงดลจากแทรมโพลีน ∫N dt':'พื้นที่สีฟ้า (+) หักพื้นที่สีส้ม (−) = Δp'; draw(); }
+els.trampMode.addEventListener('click',()=>changeMode('tramp')); els.netMode.addEventListener('click',()=>changeMode('net'));
+function seekFromEvent(ev){ const r=els.canvas.getBoundingClientRect(), xx=ev.clientX-r.left, plot=chartSettings(r.width,240); const fraction=clamp((xx-plot.left)/(plot.right-plot.left),0,1); clock=model.fallTime+fraction*model.contactTime; setPlaying(false); draw(); }
+let chartDragging=false; els.canvas.addEventListener('pointerdown',e=>{chartDragging=true; try{els.canvas.setPointerCapture(e.pointerId)}catch(err){} seekFromEvent(e)}); els.canvas.addEventListener('pointermove',e=>{if(chartDragging) seekFromEvent(e)}); els.canvas.addEventListener('pointerup',()=>chartDragging=false); els.canvas.addEventListener('pointercancel',()=>chartDragging=false); window.addEventListener('resize',draw);
+function tick(now){ if(!lastFrame) lastFrame=now; const dt=clamp((now-lastFrame)/1000,0,.07); lastFrame=now; if(playing&&model.total){ clock+=dt*speed; if(clock>=model.total) clock%=model.total; draw(); } requestAnimationFrame(tick); }
+updateModel(); setPlaying(true); requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
